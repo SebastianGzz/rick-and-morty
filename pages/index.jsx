@@ -21,6 +21,7 @@ export async function getStaticProps() {
 
 export default function Home({ nextPage, data }) {
   const [characters, setCharacters] = useState(data);
+  const [filtedCharacters, setFiltedCharacters] = useState(characters);
   const [nextUrl, setNextUrl] = useState(nextPage);
   const [search, setSearch] = useState("");
 
@@ -31,6 +32,14 @@ export default function Home({ nextPage, data }) {
     setCharacters([...characters, ...newData.results]);
     setNextUrl(newData.info.next);
   };
+
+  useEffect(() => {
+    setFiltedCharacters(
+      characters.filter((character) =>
+        character.name.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [search, characters]);
 
   useEffect(() => {
     console.log(characters);
@@ -57,7 +66,7 @@ export default function Home({ nextPage, data }) {
       </header>
 
       <section className={styles.characters_wrapper}>
-        {characters.map((character, index) => (
+        {filtedCharacters.map((character, index) => (
           <Link href={`/character/${index + 1}`} key={index}>
             <a>
               <div className={styles.character_container}>
@@ -81,14 +90,13 @@ export default function Home({ nextPage, data }) {
             </a>
           </Link>
         ))}
+        <button
+          className={styles.button_loading_more}
+          onClick={getMoreCharacters}
+        >
+          Load more
+        </button>
       </section>
-
-      <button
-        className={styles.button_loading_more}
-        onClick={getMoreCharacters}
-      >
-        Load more
-      </button>
     </MainLayout>
   );
 }
