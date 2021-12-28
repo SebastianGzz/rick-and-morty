@@ -41,11 +41,6 @@ export default function Home({ nextPage, data }) {
     );
   }, [search, characters]);
 
-  useEffect(() => {
-    console.log(characters);
-    console.log(nextUrl);
-  }, [characters, nextUrl]);
-
   return (
     <MainLayout>
       <header className={styles.header}>
@@ -73,7 +68,7 @@ export default function Home({ nextPage, data }) {
                 <div className={styles.info_character}>
                   <h2>{character.name}</h2>
                   <div className={styles.status_container}>
-                    <div className={styles.circle} />
+                    <div className={character.status.toLowerCase()} />
                     <span>{character.status}</span>
                   </div>
                 </div>

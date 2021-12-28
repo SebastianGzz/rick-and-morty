@@ -1,11 +1,15 @@
 .main_container {
   max-width: 100rem;
+  min-height: calc(100vh - 8rem);
   margin: auto;
 }
 
 .footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8rem;
   background-color: #373737;
   color: #fafafa;
-  padding: 2rem;
   text-align: center;
 }

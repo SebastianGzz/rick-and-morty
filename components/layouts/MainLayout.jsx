@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Fragment } from "react";
 import styles from "../../styles/MainLayout.module.scss";
+import IconTwitter from "../icons/IconTwitter";
 
 export default function MainLayout({ title, children }) {
   return (
@@ -14,7 +15,13 @@ export default function MainLayout({ title, children }) {
       <main className={styles.main_container}>{children}</main>
 
       <footer className={styles.footer}>
-        <p>&copy; Luis Sebastian Gonzalez Cordero</p>
+        <a
+          href="https://twitter.com/gcc_sebastian"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <IconTwitter />
+        </a>
       </footer>
     </Fragment>
   );
