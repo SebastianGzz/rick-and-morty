@@ -113,20 +113,8 @@
   }
 }
 
-.button_loading_more {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #fafafa;
-  background: #3fcb8926;
-  outline: none;
-  border: 3px solid #3fcb89;
-  border-radius: 15px;
-  box-shadow: 0px 10px 30px #00000040;
-  transition: transform 0.1s ease;
-
-  &:active {
-    transform: scale(0.9);
-  }
+.loader_wrapper {
+  height: 8rem;
 }
 
 @media (min-width: 500px) {
