@@ -1,6 +1,7 @@
-import Head from "next/head";
 import { Fragment } from "react";
-import styles from "../../styles/MainLayout.module.scss";
+import Head from "next/head";
+import PropTypes from "prop-types";
+import styles from "../../styles/layouts/MainLayout.module.scss";
 import IconTwitter from "../icons/IconTwitter";
 
 export default function MainLayout({ title, children }) {
@@ -29,4 +30,8 @@ export default function MainLayout({ title, children }) {
 
 MainLayout.defaultProps = {
   title: "Rick and Morty",
+};
+
+MainLayout.propTypes = {
+  title: PropTypes.string,
 };

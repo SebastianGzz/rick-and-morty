@@ -1,12 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import IconSearch from "../components/icons/IconSearch";
 import MainLayout from "../components/layouts/MainLayout";
 import Loader from "../components/Loader";
-import styles from "../styles/Home.module.scss";
-import logoRickandMorty from "../public/logo.png";
+import CharacterCard from "../components/home-page/CharacterCard";
+import styles from "../styles/home-page/Home.module.scss";
+import Header from "../components/home-page/Header";
 
 export async function getStaticProps() {
   const res = await fetch("https://rickandmortyapi.com/api/character");
@@ -26,8 +23,9 @@ export default function Home({ nextPage, data }) {
   const [nextUrl, setNextUrl] = useState(nextPage);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
   const loadMoreElement = useRef(null);
+
+  const getValueSearchInput = (currentText) => setSearch(currentText);
 
   const getMoreCharacters = async () => {
     setIsLoading(true);
@@ -60,51 +58,15 @@ export default function Home({ nextPage, data }) {
 
   return (
     <MainLayout>
-      <header className={styles.header}>
-        <Image
-          src={logoRickandMorty}
-          layout="responsive"
-          alt="Rick and Morty"
-        />
-        <div className={styles.search_wrapper}>
-          <IconSearch color="#868686" />
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search Character"
-          />
-        </div>
-      </header>
+      <Header InputEvent={getValueSearchInput} />
 
       <section className={styles.characters_wrapper}>
-        {filtedCharacters.map((character, index) => (
-          <Link href={`/character/${index + 1}`} key={index}>
-            <a>
-              <div className={styles.character_container}>
-                <div className={styles.info_character}>
-                  <h2>{character.name}</h2>
-                  <div className={styles.status_container}>
-                    <div className={character.status.toLowerCase()} />
-                    <span>{character.status}</span>
-                  </div>
-                </div>
-
-                <div className={styles.image_container}>
-                  <div className={styles.degraded} />
-                  <img
-                    className={styles.image_character}
-                    src={character.image}
-                    alt={character.name}
-                  />
-                </div>
-              </div>
-            </a>
-          </Link>
+        {filtedCharacters.map((character, i) => (
+          <CharacterCard key={i} id={character.id} {...character} />
         ))}
       </section>
 
-      <div ref={loadMoreElement}></div>
+      <div ref={loadMoreElement} />
 
       {isLoading && (
         <div className={styles.loader_wrapper}>
