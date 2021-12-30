@@ -28,6 +28,8 @@ export default function Home({ nextPage, data }) {
   const getValueSearchInput = (currentText) => setSearch(currentText);
 
   const getMoreCharacters = async () => {
+    if (!nextUrl) return setIsLoading(false);
+
     setIsLoading(true);
     const res = await fetch(nextUrl);
     const newData = await res.json();
